@@ -1,9 +1,9 @@
-import { test, expect, chromium, Browser, BrowserContext, Page } from '@playwright/test';
+import { test, chromium, Browser, BrowserContext, Page } from '@playwright/test';
 import { LoginPage } from './page/LoginPage';
 import { ProjectBoard } from './page/ProjectBoard';
 import { NavbarNavigator } from './page/NavbarNavigator';
 import testData from './data/projectBoardData.json';
-import { Helper } from '../util/helper';
+
 
 
 let browser: Browser;
@@ -36,14 +36,17 @@ for (const data of testData.testCases) {
     test(`Verify "${data.task}" in "${data.column}" with correct tags`, async () => {
       const navigator = new NavbarNavigator(page);
       await navigator.selectApplication(data.navigation);
-      const helper = new Helper();
       const dashboard = new ProjectBoard(page);
-      await helper.wait(2000);
-      await dashboard.verifyTaskInColumn(data.task,data.column);
-      await helper.wait(2000);
-      await dashboard.verifyTaskTags(data.column, data.task, data.tags);
-
-      //console.log(`Test Passed: "${data.task}" verified successfully.`);
+      try {
+        await page.waitForLoadState('networkidle');
+        await dashboard.verifyTaskInColumn(data.task, data.column);
+        await page.waitForLoadState('networkidle');
+        await dashboard.verifyTaskTags(data.column, data.task, data.tags);
+      } catch (error) {
+        console.error(`test Failed for "${data.task}":`, error);
+        throw error;
+      }
+      console.log(`Test Passed: "${data.task}" verified successfully.`);
     });
   });
 }

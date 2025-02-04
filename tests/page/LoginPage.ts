@@ -19,10 +19,13 @@ export class LoginPage extends BasePage {
     //click login button
     await this.clickAndWait(this.loginButton, 'domcontentloaded');
    
-    const dashboardHeader = this.page.locator('h1:has-text("Web Application")');
-    const isLoggedIn = await dashboardHeader.isVisible();
+    //const dashboardHeader = this.page.locator('h1:has-text("Web Application")');
+    //const isLoggedIn = await dashboardHeader.isVisible();
 
-    expect(isLoggedIn, ' Login failed: Dashboard not visible after login.').toBe(true);
+    //expect(isLoggedIn, ' Login failed: Dashboard not visible after login.').toBe(true);
+    await expect(this.page.locator('h1:has-text("Web Application")')).toBeVisible({
+      timeout: 5000,
+    });
 
   }
 
