@@ -1,0 +1,14 @@
+[
+    {
+        "name": "Verify task and tags after login",
+        "url": "https://animated-gingersnap-8cf7f2.netlify.app/",
+        "credentials": {
+            "email": "admin",
+            "password": "password123"
+        },
+        "navigation": "Web Application",
+        "task": "Implement user authentication",
+        "column": "To Do",
+        "tags": ["Feature", "High Priority"]
+    }
+]

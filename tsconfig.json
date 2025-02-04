@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",  // or "esnext" if you're using ES modules with type: "module" in package.json
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "sourceMap": true,     // Enable sourcemaps for debugging
+    "rootDir": ".",
+    "outDir": "./dist"
+  },
+  "include": ["tests/**/*.ts"]
+}
